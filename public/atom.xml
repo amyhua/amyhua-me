@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Hua | Ruby on Rails Developer]]></title>
   <link href="http://www.amyhua.me/atom.xml" rel="self"/>
   <link href="http://www.amyhua.me/"/>
-  <updated>2013-07-27T19:32:17-07:00</updated>
+  <updated>2013-07-28T01:22:10-07:00</updated>
   <id>http://www.amyhua.me/</id>
   <author>
     <name><![CDATA[Amy Hua]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Github]]></title>
+    <link href="http://www.amyhua.me/blog/2013/07/28/github/"/>
+    <updated>2013-07-28T01:16:00-07:00</updated>
+    <id>http://www.amyhua.me/blog/2013/07/28/github</id>
+    <content type="html"><![CDATA[<p><strong>Publish your Octopress / Jekyll blogs, or just edit and deploy your Github from the cloud.</strong></p>
+
+<p>If you use a self-hosted blogging website generator like Octopress/Jekyll,
+making a post on your blog can get tedious: first, you have to use rake
+to generate a new blog post, <code>rake new_post["&lt;title&gt;"]</code>; then you push
+your newly written blog post from your local repo to Github; then deploy
+it to Heroku. This can seem like quite a bit of work if you&rsquo;re just trying
+to publish blog posts on the fly, and it makes it practically impossible
+to publish blog posts from your mobile device. All the sudden, you start to
+wonder why you didn&rsquo;t use something more convenient and mobile like Blogger
+or Tumblr. Then you remember it&rsquo;s because <em>you&rsquo;re a badass</em>, and something
+like Tumblr just won&rsquo;t be able to handle that.</p>
+
+<p>But fear no more! If you use Github and deploy with Heroku,
+you can use <a href="www.prose.io">Prose</a> and <a href="https://github.com/ajlai/github-heroku-pusher">Github Heroku Pusher</a>
+together to publish your blog posts and pages from the cloud, as long
+as you can also access your command line remotely by enabling SSH on your Mac or PC.</p>
+
+<p>Enabling SSH allows you to remotely access the command line interface of your computer
+so that you can run commands like <code>rake generate</code> on your Jekyll blog from afar.
+MacLife offers an <a href="http://www.maclife.com/article/howtos/how_enable_ssh_your_mac">excellent tutorial</a>
+on enabling SSH on your Mac. HongKiat.com has a useful guide on
+<a href="http://www.hongkiat.com/blog/remote-access-mac-from-ios-android-tablets/">How to Remotely Access Mac from your Tablet</a>,
+and Forbes Magazine also published a <a href="http://www.forbes.com/sites/adriankingsleyhughes/2012/11/11/can-i-access-my-macpc-remotely-from-my-iphoneipadipad-mini/">great article examing different iPad/iPhone apps
+you can use to access your Mac or PC remotely</a>.
+It is easy and anybody can do it.</p>
+
+<p><strong>Prose</strong> allows you to edit your remote Github repos without ever
+leaving the browser, while <strong>Github Heroku Pusher</strong> pushes the latest
+commit on your github repo to Heroku.</p>
+
+<p>Combined, they allow easy
+on-the-fly blogging for your Octopress/Jekyll, etc. powered websites from the cloud,
+as well as in-the-cloud editing of your Github repos in general.</p>
+
+<p>No local repo required.</p>
+
+<h3>A warning about potential merge conflicts:</h3>
+
+<p>With this setup, it&rsquo;s easy to neglect to pull from your remote repo
+(aka your &ldquo;origin&rdquo; /repo on Github) first before trying to make
+changes on your local. Then all the sudden when you try to push
+your local repo to your remote after doing a few edits, you end
+up with a merge conflict and have to do a manual merge of the two
+branches, which can be tedious. Remember to <strong>always first pull
+the latest edits from your remote to your local before making
+changes to your local repo</strong> to avoid the potential mess.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dealing with Associations in Rails 3]]></title>

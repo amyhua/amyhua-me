@@ -1,0 +1,57 @@
+---
+layout: post
+title: "Github"
+date: 2013-07-28 01:16
+comments: true
+categories:
+---
+
+**Publish your Octopress / Jekyll blogs, or just edit and deploy your Github from the cloud.**
+
+If you use a self-hosted blogging website generator like Octopress/Jekyll,
+making a post on your blog can get tedious: first, you have to use rake
+to generate a new blog post, `rake new_post["<title>"]`; then you push
+your newly written blog post from your local repo to Github; then deploy
+it to Heroku. This can seem like quite a bit of work if you're just trying
+to publish blog posts on the fly, and it makes it practically impossible
+to publish blog posts from your mobile device. All the sudden, you start to
+wonder why you didn't use something more convenient and mobile like Blogger
+or Tumblr. Then you remember it's because *you're a badass*, and something
+like Tumblr just won't be able to handle that.
+
+But fear no more! If you use Github and deploy with Heroku,
+you can use [Prose](www.prose.io) and [Github Heroku Pusher](https://github.com/ajlai/github-heroku-pusher)
+together to publish your blog posts and pages from the cloud, as long
+as you can also access your command line remotely by enabling SSH on your Mac or PC.
+
+Enabling SSH allows you to remotely access the command line interface of your computer
+so that you can run commands like `rake generate` on your Jekyll blog from afar.
+MacLife offers an [excellent tutorial](http://www.maclife.com/article/howtos/how_enable_ssh_your_mac)
+on enabling SSH on your Mac. HongKiat.com has a useful guide on
+[How to Remotely Access Mac from your Tablet](http://www.hongkiat.com/blog/remote-access-mac-from-ios-android-tablets/),
+and Forbes Magazine also published a [great article examing different iPad/iPhone apps
+you can use to access your Mac or PC remotely](http://www.forbes.com/sites/adriankingsleyhughes/2012/11/11/can-i-access-my-macpc-remotely-from-my-iphoneipadipad-mini/).
+It is easy and anybody can do it.
+
+**Prose** allows you to edit your remote Github repos without ever
+leaving the browser, while **Github Heroku Pusher** pushes the latest
+commit on your github repo to Heroku.
+
+Combined, they allow easy
+on-the-fly blogging for your Octopress/Jekyll, etc. powered websites from the cloud,
+as well as in-the-cloud editing of your Github repos in general.
+
+
+No local repo required.
+
+
+###A warning about potential merge conflicts:
+
+With this setup, it's easy to neglect to pull from your remote repo
+(aka your "origin" /repo on Github) first before trying to make
+changes on your local. Then all the sudden when you try to push
+your local repo to your remote after doing a few edits, you end
+up with a merge conflict and have to do a manual merge of the two
+branches, which can be tedious. Remember to **always first pull
+the latest edits from your remote to your local before making
+changes to your local repo** to avoid the potential mess.

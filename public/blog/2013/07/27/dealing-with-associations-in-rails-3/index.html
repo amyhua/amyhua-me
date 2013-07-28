@@ -69,16 +69,18 @@ the various types of associations among your objects. Some &hellip;">
       <div class="nav-collapse">
                 <ul class="nav">
           <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="/blog/archives">Blog</a></li>
           <li><a href="/projects">Projects</a></li>
           <li><a href="/contact">Contact</a></li>
+          
         </ul>
 
         
           <form action="http://google.com/search" method="get" class="navbar-search pull-left">
             <fieldset role="search">
               <input type="hidden" name="q" value="site:www.amyhua.me" />
-              <input type="text" name="q" results="0" placeholder="Search" class="search-query span2" />
+              <input type="text" name="q" results="0" placeholder="Hack It" class="search-query span2" />
             </fieldset>
           </form>
         
@@ -89,7 +91,8 @@ the various types of associations among your objects. Some &hellip;">
 </div>
 
     </header>
-    <div id="main">
+    
+    <div id="main" class="span8">
       <div id="content">
         <div class="row">
   
@@ -395,6 +398,8 @@ Best of luck.</p>
           <a class="basic-alignment pull-left" href="/blog/2013/07/26/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
         
         
+          <a class="basic-alignment pull-right" href="/blog/2013/07/28/github/" title="Next Post: Github">Github &raquo;</a>
+        
       </p>
     </footer>
     
@@ -403,12 +408,16 @@ Best of luck.</p>
 
   
     
-  <div class="span4">
+  <div class="span3 sidebar">
     <div class="well">
       
         <section>
   <h2>Recent Posts</h2>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/github/">Github</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/27/dealing-with-associations-in-rails-3/">Dealing with Associations in Rails 3</a>
@@ -423,13 +432,51 @@ Best of luck.</p>
 
 <section>
   <h2>GitHub Repos</h2>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
   
   <a href="https://github.com/amyhua">@amyhua</a> on GitHub
   
   <script type="text/javascript">
+  var github = (function(){
+  function render(target, repos){
+    var i = 0, fragment = '', t = $(target)[0];
+
+    for(i = 0; i < repos.length; i++) {
+      fragment += '<li><a href="'+repos[i].url+'">'+repos[i].name+'</a><p>'+repos[i].description+'</p></li>';
+    }
+    t.innerHTML = fragment;
+  }
+  return {
+    showRepos: function(options){
+      $.ajax({
+          url: "http://github.com/api/v2/json/repos/show/"+options.user+"?callback=?"
+        , type: 'jsonp'
+        , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+        , success: function(data) {
+          var repos = [];
+          if (!data || !data.repositories) { return; }
+          for (var i = 0; i < data.repositories.length; i++) {
+            if (options.skip_forks && data.repositories[i].fork) { continue; }
+            repos.push(data.repositories[i]);
+          }
+          repos.sort(function(a, b) {
+            var aDate = new Date(a.pushed_at).valueOf(),
+                bDate = new Date(b.pushed_at).valueOf();
+
+            if (aDate === bDate) { return 0; }
+            return aDate > bDate ? -1 : 1;
+          });
+
+          if (options.count) { repos.splice(options.count); }
+          render(options.target, repos);
+        }
+      });
+    }
+  };
+})();
+
+  </script>
+
+    <script type="text/javascript">
     $.domReady(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
@@ -447,7 +494,6 @@ Best of luck.</p>
         });
     });
   </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 
@@ -465,7 +511,107 @@ Best of luck.</p>
 
       </div>
     </div>
-    <footer class="footer"><p>
+    
+	  
+  <div class="span3 sidebar">
+    <div class="well">
+      
+        <section>
+  <h2>Recent Posts</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/github/">Github</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/27/dealing-with-associations-in-rails-3/">Dealing with Associations in Rails 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h2>GitHub Repos</h2>
+  
+  <a href="https://github.com/amyhua">@amyhua</a> on GitHub
+  
+  <script type="text/javascript">
+  var github = (function(){
+  function render(target, repos){
+    var i = 0, fragment = '', t = $(target)[0];
+
+    for(i = 0; i < repos.length; i++) {
+      fragment += '<li><a href="'+repos[i].url+'">'+repos[i].name+'</a><p>'+repos[i].description+'</p></li>';
+    }
+    t.innerHTML = fragment;
+  }
+  return {
+    showRepos: function(options){
+      $.ajax({
+          url: "http://github.com/api/v2/json/repos/show/"+options.user+"?callback=?"
+        , type: 'jsonp'
+        , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+        , success: function(data) {
+          var repos = [];
+          if (!data || !data.repositories) { return; }
+          for (var i = 0; i < data.repositories.length; i++) {
+            if (options.skip_forks && data.repositories[i].fork) { continue; }
+            repos.push(data.repositories[i]);
+          }
+          repos.sort(function(a, b) {
+            var aDate = new Date(a.pushed_at).valueOf(),
+                bDate = new Date(b.pushed_at).valueOf();
+
+            if (aDate === bDate) { return 0; }
+            return aDate > bDate ? -1 : 1;
+          });
+
+          if (options.count) { repos.splice(options.count); }
+          render(options.target, repos);
+        }
+      });
+    }
+  };
+})();
+
+  </script>
+
+    <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'amyhua',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+</section>
+
+
+
+
+
+      
+    </div>
+  </div>
+
+
+	
+    <footer class="footer span11"><p>
   Copyright &copy; 2013 - Amy Hua -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
   
@@ -510,5 +656,6 @@ Best of luck.</p>
 
 
   </div>
+
 </body>
 </html>
